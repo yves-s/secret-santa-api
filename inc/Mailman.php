@@ -1,5 +1,6 @@
 <?php
 namespace Mailman;
+require 'vendor/autoload.php';
 
 use \Mailjet\Resources;
 
@@ -36,7 +37,8 @@ class Mailman
             ];
 
             $response = $this->mj->post(Resources::$Email, ['body' => $body]);
-            $response->success() && var_dump($response->getData());
+
+            return $response->success();
         }
     }
 

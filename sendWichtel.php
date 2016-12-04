@@ -72,13 +72,12 @@
                         $mailman = new \Mailman\Mailman();
                         $res = $mailman->send($assignedSecretSantas, $sender);
 
-                        die(json_encode($res));
-
                         die(
                             json_encode([
                                 'statusCode' => '200',
                                 'msg' => 'Deine Wichtel wurden verschickt',
-                                'data' => $assignedSecretSantas
+                                'data' => $assignedSecretSantas,
+                                'response' => $res
                             ])
                         );
 
