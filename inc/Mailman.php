@@ -36,9 +36,7 @@ class Mailman
                 ]
             ];
 
-            $response = $this->mj->post(Resources::$Email, ['body' => $body]);
-
-            return $response->success();
+            $this->mj->post(Resources::$Email, ['body' => $body]);
         }
     }
 

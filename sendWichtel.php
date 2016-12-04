@@ -70,14 +70,13 @@
 
                         $_SESSION['backupfile'] = sicherungskopie($assignedSecretSantas);
                         $mailman = new \Mailman\Mailman();
-                        $res = $mailman->send($assignedSecretSantas, $sender);
+                        $mailman->send($assignedSecretSantas, $sender);
 
                         die(
                             json_encode([
                                 'statusCode' => '200',
                                 'msg' => 'Deine Wichtel wurden verschickt',
-                                'data' => $assignedSecretSantas,
-                                'response' => $res
+                                'data' => $assignedSecretSantas
                             ])
                         );
 
