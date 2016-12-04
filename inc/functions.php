@@ -1,6 +1,4 @@
 <?php
-    use \Mailjet\Resources;
-
     function getEmails($secretSantas) {
         $emails = [];
 
@@ -31,33 +29,6 @@
 			//Ist Index = 0 speichere den Wert der 0-ten Stelle an die -$i-te Stelle
 			//else $outputArray[$i-1] = $array[$i];
 		} return($outputArray);
-	}
-
-	function mailWichtel($wichtelArray, $sender){
-		$bearerEmail = ($sender->email) ? $sender->email : "wichtelmann@nordpol.gov";
-		$bearerName = ($sender->name) ? $sender->name : "Secret Santa";
-		$message = ($sender->message) ? "Message: " . $sender->message : "Der Wichtelmann kommt angeritten";
-		$subject = ($sender->subject) ? $sender->subject : "Pssst... dein Wichtel ist...";
-        $mj = new \Mailjet\Client('MJ_APIKEY_PUBLIC', 'MJ_APIKEY_PRIVATE');
-
-        for($i=0; $i<count($wichtelArray); $i++){
-            $nachricht = $message . " \n ";
-            $nachricht .= "---------------- \n ";
-			$nachricht .= "Dein Wichtel ist: " . $wichtelArray[$i]['name'] . " \n ";
-            $body = [
-                'FromEmail' => "secretsanta@yslch.de",
-                'FromName' => $bearerName,
-                'Subject' => $subject,
-                'Text-part' => $nachricht,
-                'Recipients' => [
-                    [
-                        'Email' => $wichtelArray[$i]['email']
-                    ]
-                ]
-            ];
-            $response = $mj->post(Resources::$Email, ['body' => $body]);
-            $response->success() && var_dump($response->getData());
-		}
 	}
 
 	function sicherungskopie($array){

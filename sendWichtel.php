@@ -19,6 +19,7 @@
     }
 
     include('inc/functions.php');
+    include('inc/Mailman.php');
     session_start();
 
     $postdata = file_get_contents("php://input");
@@ -49,8 +50,8 @@
                 if(count($secretSantas) != 1) {
 
                     $assignedSecretSantas[$i] = [
-                        name => $secretSantas[$randomSecretSanta]->name,
-                        email => $email[$randomEmail]
+                        'name' => $secretSantas[$randomSecretSanta]->name,
+                        'email' => $email[$randomEmail]
                     ];
                     $secretSantas = unset_array($secretSantas, $randomSecretSanta);
                     $email = unset_array($email, $randomEmail);
@@ -68,7 +69,10 @@
                     try {
 
                         $_SESSION['backupfile'] = sicherungskopie($assignedSecretSantas);
-                        mailWichtel($assignedSecretSantas, $sender);
+                        $mailman = new \Mailman\Mailman();
+                        $res = $mailman->send($assignedSecretSantas, $sender);
+
+                        die(json_encode($res));
 
                         die(
                             json_encode([
