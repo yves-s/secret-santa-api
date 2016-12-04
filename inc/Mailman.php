@@ -16,9 +16,9 @@ class Mailman
     }
 
     public function send($wichtelArray, $sender){
-        $fromName = ($sender->name) ? $sender->name : "Secret Santa";
-        $message = ($sender->message) ? "Message: " . $sender->message : "Der Wichtelmann kommt angeritten";
-        $subject = ($sender->subject) ? $sender->subject : "Pssst... dein Wichtel ist...";
+        $fromName = (isset($sender->name)) ? $sender->name : "Secret Santa";
+        $message = (isset($sender->message)) ? "Message: " . $sender->message : "Der Wichtelmann kommt angeritten";
+        $subject = (isset($sender->subject)) ? $sender->subject : "Pssst... dein Wichtel ist...";
 
         for($i=0; $i<count($wichtelArray); $i++){
             $nachricht = $message . " \n ";
