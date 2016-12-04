@@ -11,7 +11,7 @@
 
 	function unset_array($array, $index){
 		$array = $array;
-		$ouputArray = array();
+        $outputArray = array();
 		$index = $index;
 
 		//Schleife bis zur Anzahl -1 der beinhaltenden Elemente durchgehen, da ein Element rausgelöscht wird.
